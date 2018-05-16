@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--meta data for sharing links on Facebook-->
-    <meta property="og:title" content="The major cities in Oregon"/>
-    <meta property="og:url" content="http://geoviz.ceoas.oregonstate.edu/storymap/examples/2.4/video.html"/>
-    <meta property="og:description" content="This is an example of a storymap."/>
-    <meta property="og:image" content="img/social.png"/>
+    <meta property="og:title" content="Courtney's Thesis"/>
+    <meta property="og:url" content="https://vanstolc.github.io/wallawalla-gw-thesis-intro"/>
+    <meta property="og:description" content="Evaluation of Compartmentalized Aquifers in the Walla Walla Sub-Basin of Oregon Using Geochemical Tracers"/>
+    <meta property="og:image" content="img/gw-well.jpg"/>
 
     <!--add required stylesheets-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -21,7 +21,6 @@
 
     <!--add favicon for the web page-->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-
 
     <!--Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
@@ -171,9 +170,6 @@
                     such as faults, slopes, impermeable layers, and well casing characteristics. In particular I
                     will compare the spatial distribution of the chemical data to fault locations in order to test
                     the hypothesis that faults act as barriers to groundwater flow.</p>
-
-
-
             </section>
 
             <section data-scene="end" data-background="img/nuttygrass-hillsidecombines.png/">
@@ -242,7 +238,7 @@
     var wells_legend = '<i style="background: darkblue; stroke = darkblue; opacity: 1"></i><p>Wells</p>';
     var faults_legend = '<i style="background: saddlebrown; stroke = saddlebrown; opacity: 1"></i><p>Faults</p>';
     var basaltgeology_legend = '<i style="background: tan; stroke = tan; opacity:0.8 "></i><p>Basalt</p>';
-    var sedgeology_legend = '<i style="background: lightyellow; stroke = lightyellow; opacity: 0.8"></i><p>Sediment</p>';
+    var sedgeology_legend = '<i style="background: #ffff66; stroke = lightyellow; opacity: 0.8"></i><p>Sediment</p>';
     var umat_legend = '<i style="background: white; stroke = darkgreen; opacity: 0.8"></i><p>Umatilla County</p>';
 
     // For each layer, the first variable is the layer, the second is the legend. The layer variable can be any kinds of layers that leaflet.js supports.
@@ -260,20 +256,19 @@
                 weight: 1,
                 opacity: 1,
                 pointToLayer: function (feature, latlng) {
-                    return L.marker(latlng, {icon: L.divIcon({className: 'fa fa-circle'})});
+                    return L.marker(latlng, {icon: L.divIcon({className: 'fa fa-circle color1'})});
                 },
             }), legend: wells_legend},
         basaltgeology:{layer: L.geoJson.ajax('assets/orgeol-poly-basalt.geojson', {
-                color: 'tan',
+                color: '#a57940',
+                opacity: 1,
                 stroke: "tan",
                 weight: 2,
-                opacity: 1
             }), legend: basaltgeology_legend},
         sedgeology:{layer: L.geoJson.ajax('assets/orgeol-poly-sedselect.geojson', {
-                color: 'lightyellow',
+                color: '#ffff33',
                 stroke: "lightyellow",
                 weight: 2,
-                opacity: 1
             }), legend: sedgeology_legend},
         wallawalla: {layer: L.geoJson.ajax('assets/wallawalla-bounds-or-clip.geojson', {
                 color: 'red',
@@ -307,18 +302,18 @@
         studyarea: {lat: 45.0000000, lng: -120.981589, zoom: 8, name: 'Study Area',
             layers: [layers.umatilla, layers.wallawalla]},
         wellsintro: {lat: 45.896325, lng: -118.622245, zoom: 11, name: 'Draining Groundwater',
-            layers: [layers.basaltgeology, layers.wells, layers.faults, layers.sedgeology]},
+            layers: [layers.basaltgeology, layers.sedgeology, layers.wells, layers.faults]},
         policy: {lat: 45.896325, lng: -118.622245, zoom: 11, name: 'Facing the Facts',
             layers: [layers.satellite, layers.wells, layers.faults]},
         policyprob: {lat: 45.896325, lng: -118.622245, zoom: 11, name: 'Problems with Policy',
-            layers: [layers.basaltgeology, layers.wells, layers.faults, layers.sedgeology]},
+            layers: [layers.basaltgeology, layers.sedgeology, layers.wells, layers.faults]},
         strategy: {lat: 45.949312, lng: -118.528090, zoom: 13, name: 'New Solutions',
             layers: [layers.satellite, layers.wells, layers.faults]},
         goals: {lat: 45.896325, lng: -118.622245, zoom: 11, name: 'Research Goals',
-            layers: [layers.basaltgeology, layers.wells, layers.faults, layers.sedgeology]},
+            layers: [layers.basaltgeology, layers.sedgeology, layers.wells, layers.faults]},
         analysis: {lat: 45.896325, lng: -118.622245, zoom: 11, name: 'Analysis Goals',
-            layers: [layers.basaltgeology, layers.wells, layers.faults, layers.wallawalla]},
-        end: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'The End', layers: []}
+            layers: [layers.wells, layers.faults, layers.wallawalla]},
+        end: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'The End', layers: [layers.satellite]}
     };
 
     $('#storymap').storymap({
